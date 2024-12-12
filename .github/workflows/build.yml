@@ -1,4 +1,4 @@
-name: Build Program
+name: C++ CI with Automake
 
 on:
   push:
@@ -13,9 +13,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up dependencies
-        run: sudo apt-get install g++
-      - name: Build Program
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
         run: |
+          sudo apt-get update
+          sudo apt-get install -y autoconf automake libtool
+
+      - name: Generate build system
+        run: |
+          aclocal
+          autoconf
+          automake --add-missing
+
+      - name: Build
+        run: |
+          ./configure
           make
+
+      - name: Create tarball
+        run: |
+          make dist
