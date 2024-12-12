@@ -1,0 +1,21 @@
+name: Build Program
+
+on:
+  push:
+    branches:
+      - "*"
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up dependencies
+        run: sudo apt-get install g++
+      - name: Build Program
+        run: |
+          make
