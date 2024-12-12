@@ -3,7 +3,7 @@
 
 class TrigonometricFunction {
 public:
-  double FuncA();
+  double FuncA(double x, int n);
 };
 
 #endif
