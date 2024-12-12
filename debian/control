@@ -1,0 +1,11 @@
+Source: program
+Section: utils
+Priority: optional
+Maintainer: Your Name <youremail@example.com>
+Build-Depends: debhelper (>= 12), debhelper-compat (= 12)
+Standards-Version: 4.5.0
+
+Package: program
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Program to demonstrate C++ build
