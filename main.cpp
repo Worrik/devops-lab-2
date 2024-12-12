@@ -3,6 +3,9 @@
 
 int main() {
     TrigonometricFunction func;
-    std::cout << func.FuncA() << std::endl;
+    double x;
+    std::cout << "Enter x: ";
+    std::cin >> x;
+    std::cout << func.FuncA(x) << std::endl;
     return 0;
 }
