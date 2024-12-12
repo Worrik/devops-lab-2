@@ -22,9 +22,14 @@ int factorial(int n) {
     return n * factorial(n - 1);
 }
 
-double TrigonometricFunction::FuncA(double x) {
+/**
+ * @param x The input value for the hyperbolic tangent function.
+ * @param n The number of terms to include in the Taylor series approximation.
+ * @return double - The approximate value of \(\tanh(x)\).
+ */
+double TrigonometricFunction::FuncA(double x, int n) {
     double sum = 0.0;
-    for (int i = 1; i <= 3; i++) {
+    for (int i = 1; i <= n; i++) {
         sum += Bernoulli_n2[i - 1] * pow(4, i) * (pow(4, i) - 1) * pow(x, 2 * i - 1) / factorial(2 * i);
     }
     return sum;
