@@ -1,4 +1,4 @@
-name: C++ CI with Automake
+name: C++ CI with Unit Test
 
 on:
   push:
@@ -23,15 +23,13 @@ jobs:
 
       - name: Generate build system
         run: |
+          libtoolize
           aclocal
           autoconf
           automake --add-missing
 
-      - name: Build
+      - name: Build and test
         run: |
           ./configure
           make
-
-      - name: Build deb package
-        run: |
-          dpkg-buildpackage -us -uc
+          make check
