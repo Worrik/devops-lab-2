@@ -1,4 +1,5 @@
 import math
+from typing import List
 
 BERNOULLI_N2 = [
     1.0 / 6.0,
@@ -23,12 +24,12 @@ class TrigonometricFunction:
         return math.prod(range(1, n + 1))
 
     @staticmethod
-    def func_a(x: float, n: int) -> float:
-        return sum(
+    def func_a(x: float, n: int) -> List[float]:
+        return [
             BERNOULLI_N2[i - 1]
             * ((-4) ** i)
             * (1 - 4**i)
             * x ** (2 * i - 1)
             / TrigonometricFunction._factorial(2 * i)
             for i in range(1, n + 1)
-        )
+        ]
