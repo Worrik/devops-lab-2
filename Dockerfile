@@ -1,21 +1,20 @@
-FROM python:3.10-slim as builder
+FROM python:3.10-alpine as builder
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y git \
-    && git clone --branch branchHTTPservMutli https://github.com/Worrik/devops-lab-2.git .
+RUN apk add --no-cache git
 
-RUN pip install -r requirements.txt
+RUN git clone --branch branchHTTPservMutli https://github.com/Worrik/devops-lab-2.git .
 
-FROM alpine:3.18
+RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
+
+FROM python:3.10-alpine
 
 WORKDIR /app
 
 COPY --from=builder /app /app
-
-RUN apk add --no-cache python3 py3-pip
+COPY --from=builder /install /usr/local
 
 EXPOSE 8000
 
 CMD ["uvicorn", "http_server:app", "--host", "0.0.0.0", "--port", "8000"]
-
